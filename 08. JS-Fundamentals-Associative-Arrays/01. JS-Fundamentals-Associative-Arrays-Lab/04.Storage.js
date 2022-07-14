@@ -12,6 +12,8 @@ function storage(input) {
     }
   }
 
-  console.log(storageMap);
+  for (const [key, value] of storageMap) {
+    console.log(`${key} -> ${value}`);
+  }
 }
 storage(["tomatoes 10", "coffee 5", "olives 100", "coffee 40"]);

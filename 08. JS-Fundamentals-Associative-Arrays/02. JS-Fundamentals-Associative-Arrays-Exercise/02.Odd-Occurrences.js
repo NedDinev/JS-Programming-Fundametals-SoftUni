@@ -4,11 +4,11 @@ function oddOccurrencies(data) {
 
   for (let word of words) {
     word = word.toLowerCase();
-    if (result.has(word)) {
+    if (!result.has(word)) {
+      result.set(word, 1);
+    } else {
       let oldValue = result.get(word);
       result.set(word, oldValue + 1);
-    } else {
-      result.set(word, 1);
     }
   }
 
