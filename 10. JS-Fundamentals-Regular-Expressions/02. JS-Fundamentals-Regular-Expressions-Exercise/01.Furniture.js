@@ -1,23 +1,21 @@
 function furniture(input) {
-  let inputString = input.join(" ");
-  let pattern = />>\b[A-Z]{1}[A-Za-z]+<<[0-9.]+![0-9]+\b/gm;
-  let match = pattern.exec(inputString);
-  let allProducts = [];
-  let total = 0;
-  while (match !== null) {
-    allProducts.push(match[0]);
-    match = pattern.exec(inputString);
-  }
-  console.log("Bought furniture: ");
+  let text = input.join(" ");
+  let totalSum = 0;
+  let pattern =
+    />>\b(?<name>[A-Z]{1}[A-Za-z]+)<<(?<price>[0-9.]+)!(?<quantity>[0-9]+)\b/gm;
+  let valid;
 
-  for (let data of allProducts) {
-    let product = data.split("<<");
-    let name = product[0].slice(2);
-    let [price, quantity] = product[1].split("!");
-    total += price * quantity;
-    console.log(name);
+  console.log("Bought furniture:");
+
+  while ((valid = pattern.exec(text)) !== null) {
+    let validName = valid.groups["name"];
+    let validPrice = Number(valid.groups["price"]);
+    let validQuantity = Number(valid.groups["quantity"]);
+    console.log(validName);
+    totalSum += validPrice * validQuantity;
   }
-  console.log(`Total money spend: ${total.toFixed(2)}`);
+
+  console.log(`Total money spend: ${totalSum.toFixed(2)}`);
 }
 
 furniture([
